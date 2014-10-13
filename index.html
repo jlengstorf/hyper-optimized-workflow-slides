@@ -1,0 +1,960 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Hyper-Optimized Workflow with Grunt, LESS, Autoprefixer, Uncss, and More</title>
+
+    <meta name="description" content="How to use task runners like Grunt and Gulp to automate boring, repetitive, and frustrating tasks.">
+    <meta name="author" content="Jason Lengstorf">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/theme/copter.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+        document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="//cloud.typography.com/6102252/625342/css/fonts.css" />
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section data-markdown>
+            <script type="text/template">
+                # Hyper-Optimized Workflow
+                ### With Grunt, LESS, Autoprefixer, Uncss, and More
+
+                (Tweeting? Hashtag #hyperopt)
+
+                <small>Presented by [Jason Lengstorf](http://lengstorf.com) of [Copter Labs](http://www.copterlabs.com)</small>
+
+                <small>Twitter: [@jlengstorf](https://twitter.com/jlengstorf) | Email: [jason@copterlabs.com](mailto:jason@copterlabs.com)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                <!-- .slide: data-background="url(img/jason-lengstorf.jpg)" class="push-right" -->
+
+                ## A Little Background
+
+                * Founder of Copter Labs <!-- .element: class="fragment" -->
+                * Consultant for startups/agencies <!-- .element: class="fragment" -->
+                * Pixel pushing since 2003 <!-- .element: class="fragment" -->
+                * Author of 3 books on nerd shit <!-- .element: class="fragment" -->
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                # Overview of Task Runners
+
+                Note: 
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## What Is a Task Runner?
+
+                A task runner (or build system) is a script that executes a list of actions, typically using one or more plugins.
+
+                Note: 
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Popular Task Runners
+
+                * [Grunt.js](http://gruntjs.com)
+                * [Gulp.js](http://gulpjs.com)
+                * [Brunch](http://brunch.io)
+                * [Broccoli](https://github.com/broccolijs/broccoli)
+
+                Note: 
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                # Why Bother?
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Humans Are Bad at Menial Tasks
+
+                * We&rsquo;re Lazy <!-- .element class="fragment" -->
+                * We&rsquo;re Inconsistent <!-- .element class="fragment" -->
+                * We&rsquo;re Forgetful <!-- .element class="fragment" -->
+                * We&rsquo;re Forgetful <!-- .element class="fragment" -->
+                * We&rsquo;re Forgetful <!-- .element class="fragment" -->
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Robots Are Good at Menial Tasks
+
+                (It&rsquo;s what they&rsquo;re built for.)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Automation Is a Huge Win
+
+                * Less time spent &ldquo;polishing&rdquo; <!-- .element class="fragment" -->
+                * Less effort (running scripts, moving files, etc.) <!-- .element class="fragment" -->
+                * Tasks are always consistent <!-- .element class="fragment" -->
+                * Tasks are always actually completed <!-- .element class="fragment" -->
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                # What Task Runners Do
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Handle Preprocessing
+
+                LESS, SCSS, CoffeeScript, etc.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Concatenate &amp; Minify Files
+
+                Such as CSS and JavaScript.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Lint Files
+
+                Using JSHint, JSLint, etc.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Start a Server
+
+                For local development.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Live Reload Changes
+
+                Refresh the browser when files change.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Create Production Builds
+
+                Output templates to static HTML, etc.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Optimize Images
+
+                Reduce the size of JPGs, PNGs, etc.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Bump File Versions
+
+                Update `package.json`, `bower.json`, the Git version...
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Pretty Much Anything
+
+                If you can do it with code, it can be a task.
+            </script>
+        </section>
+
+<!-- BEGIN WORKSHOP-ONLY SLIDES -->
+
+        <section data-markdown>
+            <script type="text/template">
+                # Real Examples Using Grunt &amp; Gulp
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Part 1: A Modern Fancypants App 
+
+                * Built on the MEAN stack
+                * Uses LESS for styles
+                * Uses EJS for templating
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Headache Gruntwork
+
+                * Compile LESS to CSS
+                * Add vendor prefixes to CSS
+                * Lint JS files
+                * Combine and minify JS files
+                * Set up a dev server locally
+                * Reload when files are updated
+
+                <small>App Source Code: [http://git.io/2JuyAA]()</small>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Part 2: Setting Up Grunt
+
+                Create a `Gruntfile.js`:
+
+                    'use strict';
+                    module.exports = function(grunt) {
+
+                      // Dynamically loads all required grunt tasks
+                      require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
+
+                      // Configures the tasks that can be run
+                      grunt.initConfig({
+
+                      });
+
+                    });
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Grunt Uses Plugins
+
+                    // Install a plugin
+                    npm install grunt-pluginname
+
+                    // Install and save as a dependency
+                    npm install grunt-pluginname --save
+
+                    // Install and save as a dev dependency
+                    npm install grunt-pluginname --save-dev
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Compile LESS to CSS
+                        // Compiles LESS files to CSS
+                        less: {
+                          dist: {
+                            options: {
+                              cleancss: true // Minifies CSS output
+                            },
+                            files: { 'app/css/combined-grunt.min.css': 'app/less/{,*/}*.less' }
+                          }
+                        },
+
+                Plugin: [grunt-contrib-less](https://www.npmjs.org/package/grunt-contrib-less)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## How File Matching Works
+
+                ```
+                // Matches a single file
+                files: 'foo.js'
+
+                // Matches an array of files
+                files: [ 'foo.js', 'bar.js' ]
+
+                // Matches all files in the dir
+                files: '*'
+
+                // Matches all files with a given extension in the dir
+                files: '*.js'
+
+                // Matches all files with a given extension in all dirs
+                files: '**/*.js'
+
+                // Matches all files w/extension in this dir and one dir deeper
+                files: '{,*/}*.js'
+
+                // These rules can be combined with fragments of paths
+                files: 'src/js/{,*/}*.js'
+                ```
+
+                Plugin: [grunt-contrib-less](https://www.npmjs.org/package/grunt-contrib-less)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Add Vendor Prefixes to CSS
+                        // Adds vendor prefixes to CSS
+                        autoprefixer: {
+                          dist: {
+                            src: 'app/css/combined-grunt.min.css'
+                          }
+                        },
+
+                Plugin: [grunt-autoprefixer](https://www.npmjs.org/package/grunt-autoprefixer)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Lint JS Files
+                ```
+                    jshint: {
+                        dev: {
+                          options: {
+                            jshintrc: true,
+                            reporter: require('jshint-stylish'),
+                          },
+                          src: [ '{,*/}*.js', 'app/js/{,*/}*.js', '!app/js/combined*.js' ]
+                        }
+                    },
+                ```
+
+                Plugin: [grunt-contrib-jshint](https://www.npmjs.org/package/grunt-contrib-jshint)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## JSHint Configuration
+
+                Create a new file called `.jshintrc`:
+
+                    {
+                      "node": true,
+                      "-W097": true, // Ignores "use strict" warning
+                      "browser": true,
+                      "devel": true,
+                      "validthis": true, // Avoids a warning using `this`
+                      "globals": {
+                        "angular": true
+                      }
+                    }
+
+                More info: [JSHint Docs](http://www.jshint.com/docs/)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Combine and Minify JS Files
+
+                ```
+                    // Combines and minifies JS files
+                    uglify: {
+                      options: {
+                        mangle: false,
+                        compress: true,
+                        preserveComments: 'some'
+                      },
+                      scripts: {
+                        files: {
+                          'app/js/combined-grunt.min.js': [
+                            'app/js/{,*/}*.js',
+                            '!app/js/combined*.js'
+                          ]
+                        }
+                      }
+                    },
+                ```
+
+                Plugin: [grunt-contrib-uglify](https://www.npmjs.org/package/grunt-contrib-uglify)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Keep Track of TODO/FIXME Comments
+
+                ```
+                    // Looks for todo items and collects them in a file for reference
+                    todo: {
+                      options: {
+                        file: "_TODO.md"
+                      },
+                      src: [
+                        '**/*.js',
+                        'app/**/*.less',
+                        'app/**/*.ejs',
+                        'app/**/*.html',
+                        '!node_modules/**/*.*',
+                        '!app/lib/**/*.*'
+                      ],
+                    },
+                ```
+
+                Plugin: [grunt-todo](https://www.npmjs.org/package/grunt-todo)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Set Up a Dev Server Locally
+
+                ```
+                    // Watches back-end files for changes, restarts the server
+                    nodemon: {
+                      dev: {
+                        script: 'server.js',
+                        options: {
+                          env: {
+                            PORT: 9000
+                          },
+                          ext: 'js,ejs,html',
+                          callback: function (nodemon) {
+                            nodemon.on('log', function (event) {
+                              console.log(event.colour);
+                            });
+
+                            // opens browser on initial server start
+                            nodemon.on('config:update', function () {
+                              // Delay before server listens on port
+                              setTimeout(function() {
+                                require('open')('http://localhost:9000');
+                              }, 1000);
+                            });
+
+                            // refreshes browser when server reboots
+                            nodemon.on('restart', function () {
+                              // Delay before server listens on port
+                              setTimeout(function() {
+                                require('fs').writeFileSync('.rebooted', 'rebooted');
+                              }, 1000);
+                            });
+                          }
+                        }
+                      }
+                    },
+                ```
+
+                Plugin: [grunt-nodemon](https://www.npmjs.org/package/grunt-nodemon)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Reload When Files Are Updated
+
+                ```
+                    // Watches front-end files for changes and reruns tasks as needed
+                    watch: {
+                      todo: {
+                        // NOTE Uses the todo file list to save time if the list changes
+                        files: [ '<%= todo.src %>' ],
+                        tasks: [ 'todo' ]
+                      },
+                      styles: {
+                        files: [ 'app/less/{,*/}*.less' ],
+                        tasks: [ 'less:dist', 'autoprefixer:dist' ],
+                        options: {
+                          livereload: true
+                        }
+                      },
+                      scripts: {
+                        files: [ 'app/js/{,*/}*.js', '!app/js/combined*.js' ],
+                        tasks: [ 'jshint:dev', 'uglify:scripts' ]
+                      },
+                      server: {
+                        files: ['.rebooted'],
+                        options: {
+                          livereload: true
+                        }
+                      } 
+                    },
+                ```
+
+                Plugin: [grunt-contrib-watch](https://www.npmjs.org/package/grunt-contrib-watch)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Run Nodemon and Watch Concurrently
+
+                ```
+                    // Allows us to run watch and nodemon concurrently with logging
+                    concurrent: {
+                      dev: {
+                        tasks: [ 'nodemon:dev', 'watch' ],
+                        options: {
+                          logConcurrentOutput: true
+                        }
+                      }
+                    },
+                ```
+
+                Plugin: [grunt-concurrent](https://www.npmjs.org/package/grunt-concurrent)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Register the Default Task
+
+                ```
+                  // Compiles LESS/JS and checks for todos
+                  grunt.registerTask('default', [
+                    'less:dist',
+                    'autoprefixer:dist',
+                    'jshint:dev',
+                    'uglify:scripts',
+                    'todo'
+                  ]);
+                ```
+
+                This is outside of `grunt.initConfig()`.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Register the Server Task
+
+                ```
+                  // Starts a server and runs nodemon and watch using concurrent
+                  grunt.registerTask('server', [ 'concurrent:dev' ]);
+                ```
+
+                This is outside of `grunt.initConfig()`.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Part 3: Do It All Again with Gulp
+
+                Create a `gulpfile.js`:
+
+                ```
+                // Loads required dependencies
+                var gulp = require('gulp'),
+                    path = require('path'),
+                    rename = require('gulp-rename'),
+                    less = require('gulp-less'),
+                    prefix = require('gulp-autoprefixer'),
+                    jshint = require('gulp-jshint'),
+                    uglify = require('gulp-uglifyjs'),
+                    livereload = require('gulp-livereload'),
+                    server = require('tiny-lr')(),
+                    nodemon = require('gulp-nodemon');
+
+                // Sets up file paths for reuse in task/watch config
+                var filepaths = {
+                    scripts: [ 'app/js/**/*.js', '!app/js/combined*.js' ]
+                };
+                ```
+
+                No dependency automatching. #sadface
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Compile, Compress, Prefix CSS
+
+                ```
+                // Handles task relating to styles
+                gulp.task('styles', function(){
+                    gulp.src('app/less/main.less')
+                        
+                        // Compiles LESS files to CSS and minifies it
+                        .pipe(less({ cleancss: true }))
+
+                        // Adds vendor prefixes to CSS
+                        .pipe(prefix())
+
+                        // Renames the CSS file and saves it in the proper place
+                        .pipe(rename('combined-gulp.min.css'))
+                        .pipe(gulp.dest('app/css/'))
+
+                        // Triggers a live reload to show changes immediately
+                        .pipe(livereload());
+                });
+                ```
+
+                Plugins: 
+                    [gulp-less](https://www.npmjs.org/package/gulp-less),
+                    [gulp-autoprefixer](https://www.npmjs.org/package/gulp-autoprefixer)
+
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Lint, Concatenate, Compress JS
+
+                ```
+                // Handles tasks relating to scripts
+                gulp.task('scripts', function(){
+                    gulp.src(filepaths.scripts)
+
+                        // Checks JS files for issues
+                        .pipe(jshint())
+                        .pipe(jshint.reporter('jshint-stylish'))
+
+                        // Combines and minifies scripts
+                        .pipe(uglify('combined-gulp.min.js', { mangle: false }))
+
+                        // Saves the minified JS
+                        .pipe(gulp.dest('app/js/'))
+
+                        // Triggers a live reload to show changes immediately
+                        .pipe(livereload());
+                });
+                ```
+
+                Plugins: 
+                    [gulp-jshint](https://www.npmjs.org/package/gulp-jshint),
+                    [gulp-uglifyjs](https://www.npmjs.org/package/gulp-uglifyjs)
+
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Track TODO/FIXME Comments
+
+                ...we can&rsquo;t. No plugin exists. Yet.
+
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Set Up a Dev Server Locally
+
+                ```
+                // Watches back-end files for changes, restarts the server
+                gulp.task('nodemon', function(){
+                    nodemon({ script: 'server.js' });
+                });
+                ```
+
+                Plugins: 
+                    [gulp-nodemon](https://www.npmjs.org/package/gulp-nodemon)
+
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Reload When Files Are Updated
+
+                ```
+                // Watches front-end files for changes and reruns tasks as needed
+                gulp.task('watch', [ 'nodemon' ], function(){
+                    livereload.listen();
+
+                    gulp.watch('app/less/**/*.less', [ 'styles' ]);
+                    gulp.watch(filepaths.scripts, [ 'scripts' ]);
+                });
+                ```
+
+                Plugins: 
+                    none (`watch` is built in)
+
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Register a Default Task
+
+                ```
+                gulp.task('default', [ 'watch' ]);
+                ```
+
+                So we can start with just `gulp` in the command line.
+
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                # Hands-On: Part 2
+                ## Build a Grunt Plugin
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Get the Installer
+
+                ```
+                npm install -g grunt-init
+                git clone git://github.com/gruntjs/grunt-init-gruntplugin.git ~/.grunt-init/gruntplugin
+                ```
+
+                Installs Grunt tools for building a plugin.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Create Your Plugin
+
+                ```
+                mkdir grunt-testplugin
+                cd grunt-testplugin/
+                grunt-init gruntplugin
+                ```
+
+                Follow the prompts to create the plugin.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Remove the Sample code
+
+                `tasks/testplugin.js` should look like this:
+
+                ```
+                'use strict';
+                module.exports = function(grunt) {
+
+                  grunt.registerMultiTask('testplugin', 'An example plugin.', function() {
+                    
+                  });
+
+                };
+                ```
+            </script>
+        </section>
+
+        <section>
+            <h2>Make It Do Something</h2>
+
+            <pre><code>'use strict';
+module.exports = function(grunt) {
+
+  grunt.registerMultiTask('testplugin', 'An example plugin.', function() {
+    var options = this.options({
+      note: '/* Inserted using a Grunt plugin */'
+    });
+
+    this.files.forEach(function(f) {
+      var prepended = options.note + grunt.util.linefeed + grunt.file.read(f.src);
+      grunt.file.write(f.dest, prepended);
+      grunt.log.ok('Note added to '+f.dest);
+    });
+  });
+
+};</code></pre>
+
+            <p>This code adds a comment to the top of given file(s).</p>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Set Up a Task
+
+                ```
+                    // Adds a comment to the top of a specified file
+                    testplugin: {
+                      addnote: {
+                        options: {
+                          note: '/* Added with Grunt */'
+                        },
+                        src: 'test.js',
+                        dest: 'test.grunt.js'
+                      }
+                    },
+                ```
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Tests?
+
+                You should be testing.
+
+                Note: Show this if we have time.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                # Hands-On: Part 3
+                ## Build a Gulp Plugin
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Gulp Doesn&rsquo;t Have a Styleguide
+
+                ```
+                /* jshint node: true */
+                'use strict';
+
+                var testPlugin = function(noteText, data) {
+                  
+                };
+
+                module.exports = testPlugin;
+                ```
+
+                We just start with a blank Node file.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Make It Do Something
+
+                ```
+                var stream = require('event-stream');
+                var gutil = require('gulp-util');
+                var extend = require('lodash.assign');
+
+                var testPlugin = function(noteText, data) {
+                  noteText = noteText + '\n' || '';
+
+                  return stream.map(function(file, cb){
+                    file.contents = Buffer.concat([
+                      new Buffer(gutil.template(noteText, extend({file : file}, data))),
+                      file.contents
+                    ]);
+                    gutil.log('Added a note.');
+                    cb(null, file);
+                  });
+                };
+                module.exports = testPlugin;
+                ```
+
+                Adds a comment to the top of given file(s).
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Set Up a Task
+
+                ```
+                gulp.task('test', function(){
+                    gulp.src('test.js')
+                        .pipe(testplugin('/* Comment added with Gulp */'))
+                        .pipe(rename('test.gulp.js'))
+                        .pipe(gulp.dest('./'));
+                });
+                ```
+            </script>
+        </section>
+
+<!-- END WORKSHOP-ONLY SLIDES -->
+
+        <section data-markdown>
+            <script type="text/template">
+                # Questions?
+
+                Note: Don&rsquo;t stick on this slide. Go to the next one.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                # Automate Your Gruntwork
+                ### With Task Runners like Grunt and Gulp
+
+                <small>Presented by [Jason Lengstorf](http://lengstorf.com) of [Copter Labs](http://www.copterlabs.com)</small>
+
+                <small>Twitter: [@jlengstorf](https://twitter.com/jlengstorf) | Email: [jason@copterlabs.com](mailto:jason@copterlabs.com)
+            </script>
+        </section>
+
+    </div>
+
+</div>
+
+<div class="hashtag">
+    <p>
+        @jlengstorf #CSSDevConf #hyperopt
+    </p>
+</div>
+
+<footer>
+    <ul class="inline">
+        <li>&ldquo;Hyper-Optimized Workflow&rdquo; by <a href="http://lengstorf.com">Jason Lengstorf</a> (#hyperopt)</li>
+        <li><a href="https://twitter.com/jlengstorf">@jlengstorf</a></li>
+        <li><a href="https://facebook.com/jasonlengstorf">facebook.com/jasonlengstorf</a></li>
+        <li><a href="https://github.com/jlengstorf/grunt-gulp-broccoli-workshop">View this on GitHub</a></li>
+    </ul>
+</footer>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'fade',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+            { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+            { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+    });
+
+</script>
+
+</body>
+</html>

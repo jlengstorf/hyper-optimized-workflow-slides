@@ -1,0 +1,219 @@
+/**
+ * Copter Labs theme for reveal.js.
+ *
+ * Copyright (C) 2014 Copter Labs, http://www.coperlabs.com/
+ */
+
+// Default mixins and settings -----------------
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Override theme settings (see ../template/settings.scss)
+$mainFont: 'Mercury Text G2 A', 'Mercury Text G2 B', Georgia, "Times New Roman", Times, serif;
+$mainColor: #403f3d;
+$headingFont: 'Knockout 67 A', 'Knockout 67 B', impact, sans-serif;;
+$headingColor: #1a1918;
+$headingLetterSpacing: .02em;
+$headingTextShadow: none;
+$heading1TextShadow: none;
+$backgroundColor: #fffdfa;
+$linkColor: #0a58cc;
+$linkColorHover: lighten( $linkColor, 20% );
+$selectionBackgroundColor: $linkColor;
+
+// Fix links so they are not cut off
+.reveal a:not(.image) {
+    line-height: 1.3em;
+}
+
+// Background generator
+@mixin bodyBackground() {
+    @include radial-gradient( darken($backgroundColor, 2%), $backgroundColor );
+    // @include radial-gradient( $backgroundColor, #fff );
+}
+
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------
+
+.reveal {
+    h1 { font-family: 'Cyclone A', 'Cyclone B', impact, sans-serif; }
+    h2 { font-size: 3em; }
+
+    small {
+        color: lighten($mainColor, 20%);
+        letter-spacing: .01em;
+        font-size: 22px;
+
+        > * {
+            line-height: inherit;
+            vertical-align: baseline;
+            font-size: inherit;
+        }
+    }
+
+    .slides>section {
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        &.push-right {
+            padding-left: 40%;
+
+            h2 {
+                text-align: left;
+            }
+        }
+
+        blockquote {
+            box-shadow: none;
+            color: lighten($mainColor, 15%);
+        }
+    }
+
+    .slide-background {
+        background-size: cover !important;
+        background-position: center !important;
+    }
+}
+
+section li {
+    margin-bottom: 4px !important;
+}
+
+section p>code,section li>code {
+    display: inline-block;
+    padding: 0 8px !important;
+    border: 1px solid #ccc !important;
+    border-radius: 3px;
+    background: #eee;
+}
+
+section div.code,section div.example {
+    position: relative;
+    display: inline-block;
+    width: 48%;
+    vertical-align: top;
+    padding-top: 0;
+
+    &:before {
+        position: absolute;
+        text-transform: uppercase;
+        font-size: 16px;
+        line-height: 15px;
+        font-family: monospace;
+    }
+}
+
+section div.code {
+    &:before {
+        content: 'Code';
+        top: -16px;
+        left: 22px;
+    }
+
+    &>pre:first-of-type {
+        margin-top: 0;
+    }
+}
+
+section div.example {
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 4px dashed $headingColor;
+    background-color: #fff;
+
+    &:before {
+        content: 'Output';
+        top: -20px;
+        left: -4px;
+    }
+
+    &:after {
+        content: ' ';
+        display: block;
+        clear: both;
+    }
+}
+
+section .left,section .right {
+    width: 45%;
+    margin: 0 2% 2%;
+    display: inline-block;
+    vertical-align: top;
+    text-align: left;
+}
+
+.hashtag {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    p {
+        margin: 0;
+        padding: 10px 20px;
+        background-color: opacify($mainColor, .75);
+        border: 1px solid $mainColor;
+        border-top: 0;
+        border-right: 0;
+        border-radius: 0 0 0 15px;
+        color: $backgroundColor;
+        font-family: $mainFont;
+        font-size: 1.25vw;
+        letter-spacing: .1em;
+    }
+}
+
+footer {
+    display: none;
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    z-index: 1000;
+
+    @media (min-width: 960px) {
+        display: block;
+    }
+
+    ul.inline {
+        width: 100%;
+        padding: 0;
+        text-align: center;
+        box-sizing: border-box;
+
+        li {
+            display: inline-block;
+            margin: 0 10px;
+            font-family: $mainFont;
+            font-size: 17px;
+            color: #666461;
+
+            a {
+                color: inherit;
+
+                &:before {
+                    display: inline-block;
+                    margin-right: 4px;
+                    font-family: 'FontAwesome';
+                    vertical-align: -5%;
+                }
+
+                &[href*="twitter.com"]:before {
+                    content: '\F099';
+                }
+
+                &[href*="facebook.com"]:before {
+                    content: '\F09A';
+                }
+
+                &[href*="github.com"]:before {
+                    content: '\F09B';
+                }
+            }
+        }
+    }
+}
