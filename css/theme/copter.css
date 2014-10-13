@@ -214,11 +214,14 @@ section div.example {
     clear: both; }
 
 section .left, section .right {
-  width: 45%;
+  width: 45% !important;
   margin: 0 2% 2%;
   display: inline-block;
   vertical-align: top;
   text-align: left; }
+
+.reveal section img {
+  min-width: 35%; }
 
 .hashtag {
   position: absolute;
@@ -236,6 +239,8 @@ section .left, section .right {
     font-family: "Mercury Text G2 A", "Mercury Text G2 B", Georgia, "Times New Roman", Times, serif;
     font-size: 1.25vw;
     letter-spacing: .1em; }
+    .hashtag p a {
+      color: inherit; }
 
 footer {
   display: none;

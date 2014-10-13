@@ -45,11 +45,31 @@
                 # Hyper-Optimized Workflow
                 ### With Grunt, LESS, Autoprefixer, Uncss, and More
 
-                (Tweeting? Hashtag #hyperopt)
+                (Please use #hyperopt for any tweets about this session.)
 
                 <small>Presented by [Jason Lengstorf](http://lengstorf.com) of [Copter Labs](http://www.copterlabs.com)</small>
 
                 <small>Twitter: [@jlengstorf](https://twitter.com/jlengstorf) | Email: [jason@copterlabs.com](mailto:jason@copterlabs.com)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                # Don&rsquo;t Forget to Vote!
+
+                Text (504) 229-6828 and include:
+
+                * The session hashtag: #hyperopt
+                * Your rating of 1 to 5
+                * Optional comment
+
+                <br>For example:
+
+                <small>&ldquo;#hyperopt 5 Jason has forever changed my life with this presentation.&rdquo;</small>
+
+                or simply:
+
+                <small>#hyperopt 5</small>
             </script>
         </section>
 
@@ -68,7 +88,7 @@
 
         <section data-markdown>
             <script type="text/template">
-                # Overview of Task Runners
+                # Workflow Optimization for Winners
 
                 Note: 
             </script>
@@ -107,17 +127,22 @@
             <script type="text/template">
                 ## Humans Are Bad at Menial Tasks
 
-                * We&rsquo;re Lazy <!-- .element class="fragment" -->
-                * We&rsquo;re Inconsistent <!-- .element class="fragment" -->
-                * We&rsquo;re Forgetful <!-- .element class="fragment" -->
-                * We&rsquo;re Forgetful <!-- .element class="fragment" -->
-                * We&rsquo;re Forgetful <!-- .element class="fragment" -->
+                ![Human Assembly Line](img/human-assembly-line.gif)
+
+                We have a tendency to be:
+
+                * Lazy <!-- .element: class="fragment" -->
+                * Inconsistent <!-- .element: class="fragment" -->
+                * Forgetful <!-- .element: class="fragment" -->
+                * Easily Overwhelmed <!-- .element: class="fragment" -->
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
                 ## Robots Are Good at Menial Tasks
+
+                ![Robot Assembly Line](img/robot-assembly-line.gif)
 
                 (It&rsquo;s what they&rsquo;re built for.)
             </script>
@@ -128,15 +153,16 @@
                 ## Automation Is a Huge Win
 
                 * Less time spent &ldquo;polishing&rdquo; <!-- .element class="fragment" -->
-                * Less effort (running scripts, moving files, etc.) <!-- .element class="fragment" -->
+                * Less effort to do things right <!-- .element class="fragment" -->
                 * Tasks are always consistent <!-- .element class="fragment" -->
-                * Tasks are always actually completed <!-- .element class="fragment" -->
+                * Tasks are always completed <!-- .element class="fragment" -->
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
                 # What Task Runners Do
+                ### A (Very) Small Sampling of the Possibilities
             </script>
         </section>
 
@@ -241,15 +267,52 @@
                 * Set up a dev server locally
                 * Reload when files are updated
 
+                <br><small>App Source Code: [http://git.io/2JuyAA]()</small>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Let&rsquo;s See the App
+
                 <small>App Source Code: [http://git.io/2JuyAA]()</small>
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
-                ## Part 2: Setting Up Grunt
+                # The Rundown on Grunt
+            </script>
+        </section>
 
-                Create a `Gruntfile.js`:
+        <section data-markdown>
+            <script type="text/template">
+                ## Vital Stats on Grunt.js
+
+                * Grunt.js is built on Node.js<!-- .element: class="fragment" -->
+                * It&rsquo;s the most popular task runner<!-- .element: class="fragment" -->
+                * The community is large (and helpful) <!-- .element: class="fragment" -->
+                * Thousands of available plugins <!-- .element: class="fragment" -->
+                * Building custom plugins is really easy <!-- .element: class="fragment" -->
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Install Grunt
+
+                Use `npm` to install `grunt-cli`:
+
+                    npm install grunt-cli --save
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Create a Gruntfile:
+
+                Create `Gruntfile.js` and save it at the root of 
+                your project.
 
                     'use strict';
                     module.exports = function(grunt) {
@@ -263,12 +326,16 @@
                       });
 
                     });
+
+                Remember to install `matchdep`:
+
+                    npm install matchdep --save-dev
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
-                ## Grunt Uses Plugins
+                ## Each Grunt Task Is a Plugin
 
                     // Install a plugin
                     npm install grunt-pluginname
@@ -278,23 +345,6 @@
 
                     // Install and save as a dev dependency
                     npm install grunt-pluginname --save-dev
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Compile LESS to CSS
-                        // Compiles LESS files to CSS
-                        less: {
-                          dist: {
-                            options: {
-                              cleancss: true // Minifies CSS output
-                            },
-                            files: { 'app/css/combined-grunt.min.css': 'app/less/{,*/}*.less' }
-                          }
-                        },
-
-                Plugin: [grunt-contrib-less](https://www.npmjs.org/package/grunt-contrib-less)
             </script>
         </section>
 
@@ -324,28 +374,163 @@
                 // These rules can be combined with fragments of paths
                 files: 'src/js/{,*/}*.js'
                 ```
-
-                Plugin: [grunt-contrib-less](https://www.npmjs.org/package/grunt-contrib-less)
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
-                ## Add Vendor Prefixes to CSS
-                        // Adds vendor prefixes to CSS
-                        autoprefixer: {
-                          dist: {
-                            src: 'app/css/combined-grunt.min.css'
+                ## Compile LESS to CSS the Hard Way
+
+                * Client-side (no no no no) <!-- .element: class="fragment" -->
+                * Server-side (overkill in production) <!-- .element: class="fragment" -->
+                * Manually at deployment (a pain in the ass) <!-- .element: class="fragment" -->
+                * Using a third-party app like CodeKit (good, but...) <!-- .element: class="fragment" -->
+
+                Note: CodeKit is awesome, but it requires everyone on the team to have it installed. Plus, if the configuration is different between machines and/or team members, it can cause unexpected results.
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Compile LESS to CSS the Easy Way
+
+                Install the plugin ([grunt-contrib-less](https://www.npmjs.org/package/grunt-contrib-less)):
+
+                    npm install grunt-contrib-less --save-dev
+
+                Add configuration to your Gruntfile:
+
+                        // Compiles LESS files to CSS
+                        less: {
+                          dev: {
+                            options: {
+                              cleancss: true // Minifies CSS output
+                            },
+                            files: { 'src/app/css/combined-grunt.min.css': 'src/app/less/{,*/}*.less' }
                           }
                         },
 
-                Plugin: [grunt-autoprefixer](https://www.npmjs.org/package/grunt-autoprefixer)
+                NOTE: The plugin is saved for dev only because we don&rsquo;t 
+                need to compile LESS in a production environment. Also, check
+                out the wacky mess in the LESS filenames -- we&rsquo;ll get to 
+                that on the next slide. Show the demo `grunt testautoprefixer`
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Vendor Prefixes the Hard Way
+
+                * Manually
+                * LESS/SASS Mixins
+
+                ```css
+                /* This sucks to do while coding */
+                .manually {
+                    -webkit-box-shadow:inset 1px 1px 2px #111;
+                    box-shadow:inset 1px 1px 2px #111;
+                }
+
+                /* This isn't CSS */
+                .with-mixin {
+                    .box-shadow(1px, 1px, 2px, #111);
+                }
+                ```
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Add Vendor Prefixes the Easy Way
+
+                Install the plugin ([grunt-autoprefixer](https://www.npmjs.org/package/grunt-autoprefixer)):
+
+                    npm install grunt-autoprefixer --save-dev
+
+                Add configuration to your Gruntfile:
+
+                        // Adds vendor prefixes to CSS
+                        autoprefixer: {
+                          dev: {
+                            src: 'src/app/css/combined-grunt.min.css'
+                          }
+                        },
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Then Just Write CSS
+
+                ```css
+                .spinning-icon {
+                    animation: spinme 2s infinite ease-in-out;
+                }
+
+                @keyframes spinme {
+                    0%   { transform: rotate(0deg); }
+                    50%  { transform: rotate(360deg); }
+                    100% { transform: rotate(0deg); }
+                }
+                ```
+
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ### Aside: When I Started Using Autoprefixer, I Was Like
+
+                ![Holy shit](img/holy-shit.gif)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Remove Unused CSS the Hard Way
+
+                * . <!-- .element: class="fragment" -->
+                * .. <!-- .element: class="fragment" -->
+                * ... <!-- .element: class="fragment" -->
+                
+                <br><small>(Has <em>anyone</em> ever done this?)</small><!-- .element: class="fragment" -->
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Remove Unused CSS the Easy Way
+
+                Install the plugin ([grunt-uncss](https://www.npmjs.org/package/grunt-uncss)):
+
+                    npm install grunt-uncss --save-dev
+
+                Add configuration to your Gruntfile:
+
+                    // Removes unused CSS selectors
+                    uncss: {
+                      testuncss: {
+                        files: {
+                          'demo/css/uncss-test-clean.css': 'demo/index.html'
+                        }
+                      }
+                    },
+
+                NOTE: Show the demo! `grunt testuncss`
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
                 ## Lint JS Files
+
+                Install the plugins ([grunt-contrib-jshint](https://www.npmjs.org/package/grunt-contrib-jshint) &amp; [jshint-stylish](https://www.npmjs.org/package/jshint-stylish)):
+
+                    npm install grunt-contrib-jshint --save-dev
+                    npm install jshint-stylish --save-dev
+
+                Add configuration to your Gruntfile:
+
                 ```
                     jshint: {
                         dev: {
@@ -353,12 +538,16 @@
                             jshintrc: true,
                             reporter: require('jshint-stylish'),
                           },
-                          src: [ '{,*/}*.js', 'app/js/{,*/}*.js', '!app/js/combined*.js' ]
+                          src: [ 
+                            '{,*/}*.js', 
+                            'src/app/js/{,*/}*.js', 
+                            '!src/app/js/combined*.js' 
+                          ]
                         }
                     },
                 ```
 
-                Plugin: [grunt-contrib-jshint](https://www.npmjs.org/package/grunt-contrib-jshint)
+                NOTE: Show the demo! `grunt jshint:testfail` `grunt jshint:testpass`
             </script>
         </section>
 
@@ -366,7 +555,7 @@
             <script type="text/template">
                 ## JSHint Configuration
 
-                Create a new file called `.jshintrc`:
+                To avoid non-issue errors, you can create a new file called `.jshintrc`:
 
                     {
                       "node": true,
@@ -387,6 +576,12 @@
             <script type="text/template">
                 ## Combine and Minify JS Files
 
+                Install the plugin ([grunt-contrib-uglify](https://www.npmjs.org/package/grunt-contrib-uglify)):
+
+                    npm install grunt-contrib-uglify --save-dev
+
+                Add configuration to your Gruntfile:
+
                 ```
                     // Combines and minifies JS files
                     uglify: {
@@ -397,41 +592,18 @@
                       },
                       scripts: {
                         files: {
-                          'app/js/combined-grunt.min.js': [
-                            'app/js/{,*/}*.js',
-                            '!app/js/combined*.js'
+                          'src/app/js/combined-grunt.min.js': [
+                            'src/app/js/{,*/}*.js',
+                            '!src/app/js/combined*.js'
                           ]
                         }
                       }
                     },
                 ```
 
-                Plugin: [grunt-contrib-uglify](https://www.npmjs.org/package/grunt-contrib-uglify)
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Keep Track of TODO/FIXME Comments
-
-                ```
-                    // Looks for todo items and collects them in a file for reference
-                    todo: {
-                      options: {
-                        file: "_TODO.md"
-                      },
-                      src: [
-                        '**/*.js',
-                        'app/**/*.less',
-                        'app/**/*.ejs',
-                        'app/**/*.html',
-                        '!node_modules/**/*.*',
-                        '!app/lib/**/*.*'
-                      ],
-                    },
-                ```
-
-                Plugin: [grunt-todo](https://www.npmjs.org/package/grunt-todo)
+                NOTE: The `mangle: false` setting is there to avoid breaking 
+                Angular. There are ways to work around this issue, but 
+                they&rsquo;re a little too involved to include here.
             </script>
         </section>
 
@@ -439,11 +611,17 @@
             <script type="text/template">
                 ## Set Up a Dev Server Locally
 
+                Install the plugin ([grunt-nodemon](https://www.npmjs.org/package/grunt-nodemon)):
+
+                    npm install grunt-nodemon --save-dev
+
+                Add configuration to your Gruntfile:
+
                 ```
                     // Watches back-end files for changes, restarts the server
                     nodemon: {
                       dev: {
-                        script: 'server.js',
+                        script: 'src/server.js',
                         options: {
                           env: {
                             PORT: 9000
@@ -474,14 +652,18 @@
                       }
                     },
                 ```
-
-                Plugin: [grunt-nodemon](https://www.npmjs.org/package/grunt-nodemon)
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
                 ## Reload When Files Are Updated
+
+                Install the plugin ([grunt-contrib-watch](https://www.npmjs.org/package/grunt-contrib-watch)):
+
+                    npm install grunt-contrib-watch --save-dev
+
+                Add configuration to your Gruntfile:
 
                 ```
                     // Watches front-end files for changes and reruns tasks as needed
@@ -492,14 +674,14 @@
                         tasks: [ 'todo' ]
                       },
                       styles: {
-                        files: [ 'app/less/{,*/}*.less' ],
-                        tasks: [ 'less:dist', 'autoprefixer:dist' ],
+                        files: [ 'src/app/less/{,*/}*.less' ],
+                        tasks: [ 'less:dev', 'autoprefixer:dev' ],
                         options: {
                           livereload: true
                         }
                       },
                       scripts: {
-                        files: [ 'app/js/{,*/}*.js', '!app/js/combined*.js' ],
+                        files: [ 'src/app/js/{,*/}*.js', '!src/app/js/combined*.js' ],
                         tasks: [ 'jshint:dev', 'uglify:scripts' ]
                       },
                       server: {
@@ -510,14 +692,18 @@
                       } 
                     },
                 ```
-
-                Plugin: [grunt-contrib-watch](https://www.npmjs.org/package/grunt-contrib-watch)
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
                 ## Run Nodemon and Watch Concurrently
+
+                Install the plugin ([grunt-concurrent](https://www.npmjs.org/package/grunt-concurrent)):
+
+                    npm install grunt-concurrent --save-dev
+
+                Add configuration to your Gruntfile:
 
                 ```
                     // Allows us to run watch and nodemon concurrently with logging
@@ -530,8 +716,6 @@
                       }
                     },
                 ```
-
-                Plugin: [grunt-concurrent](https://www.npmjs.org/package/grunt-concurrent)
             </script>
         </section>
 
@@ -542,11 +726,10 @@
                 ```
                   // Compiles LESS/JS and checks for todos
                   grunt.registerTask('default', [
-                    'less:dist',
-                    'autoprefixer:dist',
+                    'less:dev',
+                    'autoprefixer:dev',
                     'jshint:dev',
-                    'uglify:scripts',
-                    'todo'
+                    'uglify:scripts'
                   ]);
                 ```
 
@@ -569,7 +752,37 @@
 
         <section data-markdown>
             <script type="text/template">
-                ## Part 3: Do It All Again with Gulp
+                # The Deets on Gulp
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ### (I&rsquo;m So Sorry About That)
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Vital Stats on Gulp.js
+
+                * Gulp.js is built on Node.js<!-- .element: class="fragment" -->
+                * It&rsquo;s argued to be easier than Grunt <!-- .element: class="fragment" -->
+                * The community is smaller (but still helpful) <!-- .element: class="fragment" -->
+                * Fewer plugins (the important ones are there) <!-- .element: class="fragment" -->
+                * Building custom plugins is less structured <!-- .element: class="fragment" -->
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                ## Install and Set Up Gulp
+
+                Install Gulp:
+
+                ```
+                npm install gulp --save-dev
+                ```
 
                 Create a `gulpfile.js`:
 
@@ -592,7 +805,7 @@
                 };
                 ```
 
-                No dependency automatching. #sadface
+                NOTE: Don&rsquo;t forget to install the plugins with `npm install [plugin name] --save-dev`
             </script>
         </section>
 
@@ -600,7 +813,7 @@
             <script type="text/template">
                 ## Compile, Compress, Prefix CSS
 
-                ```
+                ```js
                 // Handles task relating to styles
                 gulp.task('styles', function(){
                     gulp.src('app/less/main.less')
@@ -660,15 +873,6 @@
 
         <section data-markdown>
             <script type="text/template">
-                ## Track TODO/FIXME Comments
-
-                ...we can&rsquo;t. No plugin exists. Yet.
-
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
                 ## Set Up a Dev Server Locally
 
                 ```
@@ -719,179 +923,15 @@
 
         <section data-markdown>
             <script type="text/template">
-                # Hands-On: Part 2
-                ## Build a Grunt Plugin
+                # Part 2: Grunt in Regular WordPress Sites
             </script>
         </section>
 
         <section data-markdown>
             <script type="text/template">
-                ## Get the Installer
-
-                ```
-                npm install -g grunt-init
-                git clone git://github.com/gruntjs/grunt-init-gruntplugin.git ~/.grunt-init/gruntplugin
-                ```
-
-                Installs Grunt tools for building a plugin.
+                ## Let&rsquo;s Just Look at It
             </script>
         </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Create Your Plugin
-
-                ```
-                mkdir grunt-testplugin
-                cd grunt-testplugin/
-                grunt-init gruntplugin
-                ```
-
-                Follow the prompts to create the plugin.
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Remove the Sample code
-
-                `tasks/testplugin.js` should look like this:
-
-                ```
-                'use strict';
-                module.exports = function(grunt) {
-
-                  grunt.registerMultiTask('testplugin', 'An example plugin.', function() {
-                    
-                  });
-
-                };
-                ```
-            </script>
-        </section>
-
-        <section>
-            <h2>Make It Do Something</h2>
-
-            <pre><code>'use strict';
-module.exports = function(grunt) {
-
-  grunt.registerMultiTask('testplugin', 'An example plugin.', function() {
-    var options = this.options({
-      note: '/* Inserted using a Grunt plugin */'
-    });
-
-    this.files.forEach(function(f) {
-      var prepended = options.note + grunt.util.linefeed + grunt.file.read(f.src);
-      grunt.file.write(f.dest, prepended);
-      grunt.log.ok('Note added to '+f.dest);
-    });
-  });
-
-};</code></pre>
-
-            <p>This code adds a comment to the top of given file(s).</p>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Set Up a Task
-
-                ```
-                    // Adds a comment to the top of a specified file
-                    testplugin: {
-                      addnote: {
-                        options: {
-                          note: '/* Added with Grunt */'
-                        },
-                        src: 'test.js',
-                        dest: 'test.grunt.js'
-                      }
-                    },
-                ```
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Tests?
-
-                You should be testing.
-
-                Note: Show this if we have time.
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                # Hands-On: Part 3
-                ## Build a Gulp Plugin
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Gulp Doesn&rsquo;t Have a Styleguide
-
-                ```
-                /* jshint node: true */
-                'use strict';
-
-                var testPlugin = function(noteText, data) {
-                  
-                };
-
-                module.exports = testPlugin;
-                ```
-
-                We just start with a blank Node file.
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Make It Do Something
-
-                ```
-                var stream = require('event-stream');
-                var gutil = require('gulp-util');
-                var extend = require('lodash.assign');
-
-                var testPlugin = function(noteText, data) {
-                  noteText = noteText + '\n' || '';
-
-                  return stream.map(function(file, cb){
-                    file.contents = Buffer.concat([
-                      new Buffer(gutil.template(noteText, extend({file : file}, data))),
-                      file.contents
-                    ]);
-                    gutil.log('Added a note.');
-                    cb(null, file);
-                  });
-                };
-                module.exports = testPlugin;
-                ```
-
-                Adds a comment to the top of given file(s).
-            </script>
-        </section>
-
-        <section data-markdown>
-            <script type="text/template">
-                ## Set Up a Task
-
-                ```
-                gulp.task('test', function(){
-                    gulp.src('test.js')
-                        .pipe(testplugin('/* Comment added with Gulp */'))
-                        .pipe(rename('test.gulp.js'))
-                        .pipe(gulp.dest('./'));
-                });
-                ```
-            </script>
-        </section>
-
-<!-- END WORKSHOP-ONLY SLIDES -->
 
         <section data-markdown>
             <script type="text/template">
@@ -903,8 +943,30 @@ module.exports = function(grunt) {
 
         <section data-markdown>
             <script type="text/template">
-                # Automate Your Gruntwork
-                ### With Task Runners like Grunt and Gulp
+                # Don&rsquo;t Forget to Vote!
+
+                Text (504) 229-6828 and include:
+
+                * The session hashtag: #hyperopt
+                * Your rating of 1 to 5
+                * Optional comment
+
+                <br>For example:
+
+                <small>&ldquo;#hyperopt 5 Jason has forever changed my life with this presentation.&rdquo;</small>
+
+                or simply:
+
+                <small>#hyperopt 5</small>
+            </script>
+        </section>
+
+        <section data-markdown>
+            <script type="text/template">
+                # Hyper-Optimized Workflow
+                ### With Grunt, LESS, Autoprefixer, Uncss, and More
+
+                (Please use #hyperopt for any tweets about this session.)
 
                 <small>Presented by [Jason Lengstorf](http://lengstorf.com) of [Copter Labs](http://www.copterlabs.com)</small>
 
@@ -918,7 +980,8 @@ module.exports = function(grunt) {
 
 <div class="hashtag">
     <p>
-        @jlengstorf #CSSDevConf #hyperopt
+        Tweet: 
+        <a href="https://twitter.com/intent/tweet?text=I%27m+at+%22Hyper-Optimized+Workflows+with+Grunt%2C+LESS%2C+Autoprefixer%2C+UnCSS%2C+%26+More%22+by+%40jlengstorf&amp;hashtags=CSSDevConf,hyperopt&amp;related=jlengstorf,copterlabs" target="_blank">@jlengstorf #CSSDevConf #hyperopt</a>
     </p>
 </div>
 
@@ -927,7 +990,7 @@ module.exports = function(grunt) {
         <li>&ldquo;Hyper-Optimized Workflow&rdquo; by <a href="http://lengstorf.com">Jason Lengstorf</a> (#hyperopt)</li>
         <li><a href="https://twitter.com/jlengstorf">@jlengstorf</a></li>
         <li><a href="https://facebook.com/jasonlengstorf">facebook.com/jasonlengstorf</a></li>
-        <li><a href="https://github.com/jlengstorf/grunt-gulp-broccoli-workshop">View this on GitHub</a></li>
+        <li><a href="http://github.com/jlengstorf/hyper-optimized-workflow-slides">View this on GitHub</a></li>
     </ul>
 </footer>
 
